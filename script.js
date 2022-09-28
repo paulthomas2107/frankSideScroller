@@ -4,7 +4,29 @@ window.addEventListener('load', function () {
   canvas.width = 800;
   canvas.height = 720;
 
-  class InputHandler {}
+  class InputHandler {
+    constructor() {
+      this.keys = [];
+      window.addEventListener('keydown', (e) => {
+        if (
+          (e.key === 'ArrowDown' ||
+            e.key === 'ArrowUp' ||
+            e.key === 'ArrowLeft' ||
+            e.key === 'ArrowRight') &&
+          this.keys.indexOf(e.key) === -1
+        ) {
+          this.keys.push(e.key);
+        }
+        console.log(e.key, this.keys);
+      });
+      window.addEventListener('keyup', (e) => {
+        if (e.key === 'ArrowDown') {
+          this.keys.splice(this.keys.indexOf(e.key), 1);
+        }
+        console.log(e.key, this.keys);
+      });
+    }
+  }
 
   class Player {}
 
@@ -13,6 +35,8 @@ window.addEventListener('load', function () {
   class Enemy {}
 
   function handleEnemies() {}
+
+  const input = new InputHandler();
 
   function animate() {}
 });
